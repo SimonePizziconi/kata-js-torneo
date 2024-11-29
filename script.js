@@ -1,7 +1,7 @@
 // script.js
 
 // Importa le funzioni necessarie
-import { getRandomAndRemove } from './function.js';
+import { getRandomAndRemove, getRandomIncrement } from './function.js';
 
 // Array partecipanti torneo
 const fighters = [
@@ -108,15 +108,39 @@ const weapons = [
   },
 ];
 
+console.log('Il torneo Boolkaichi ha inizio ogni combattente sceglie un arma');
+console.log('-----------');
+
 // Ogni combattente sceglie un arma casualmente
 fighters.forEach((fighter) => {
   if (weapons.length > 0) {
     fighter.weapon = getRandomAndRemove(weapons);
     fighter.totalPower = fighter.power + fighter.weapon.power;
+    console.log(
+      `${fighter.name} ha scelto ${fighter.weapon.name} con potenza ${fighter.weapon.power}`
+    );
+
+    console.log(
+      `${fighter.name} ha una potenza totale di ${fighter.totalPower}`
+    );
+
+    console.log('-----------');
   } else {
     fighter.weapon = { name: 'Nessuna arma disponibile', power: 0 };
     fighter.totalPower = fighter.power;
   }
 });
 
-console.log(fighters);
+// Ogni combattente si sottoporrà ad un allenamento che incrementerà la sua potenza
+console.log('Ogni combattente si sta sottoponendo ad un allenamento');
+console.log('-----------');
+
+fighters.forEach((fighter) => {
+  let training = getRandomIncrement();
+  fighter.totalPower = training + fighter.totalPower;
+
+  console.log(
+    `${fighter.name} si è sottoposto ad un allenamento che ha aumentato di ${training} la sua potenza e ora ha una potenza totale di ${fighter.totalPower}`
+  );
+  console.log('-----------');
+});
