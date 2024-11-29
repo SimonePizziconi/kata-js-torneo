@@ -144,3 +144,19 @@ fighters.forEach((fighter) => {
   );
   console.log('-----------');
 });
+
+// Chi si qualifica al torneo deve avere una potenza di almeno 2000
+console.log(
+  'Vediamo chi è riuscito a qualificarsi alle fasi finali del torneo'
+);
+console.log('-----------');
+
+// Creiamo un nuovo array con i combattenti con una forza superiore a 2000
+const qualifiedFighters = fighters.filter(
+  (fighter) => fighter.totalPower > 2000
+);
+
+qualifiedFighters.forEach((fighter) => {
+  console.log(`${fighter.name} si è qualificato alla fase finale`);
+  console.log('-----------');
+});
