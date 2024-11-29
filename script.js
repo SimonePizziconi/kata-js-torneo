@@ -160,3 +160,66 @@ qualifiedFighters.forEach((fighter) => {
   console.log(`${fighter.name} si è qualificato alla fase finale`);
   console.log('-----------');
 });
+
+// Aggiunta combattente "Robot" se il numero di qualificati è dispari
+if (qualifiedFighters.length % 2 !== 0) {
+  console.log("Numero dispari di qualificati: aggiungiamo un 'Robot'");
+  qualifiedFighters.push({
+    name: 'Robot',
+    power: 4000,
+    weapon: { name: 'Nessuna arma', power: 0 },
+    totalPower: 4000,
+  });
+}
+
+// Scontri tra i qualificati
+console.log('Iniziano i combattimenti: vediamo chi vincerà!');
+console.log('-----------');
+
+// 1. Inizializzare array dei vincitori
+let winners = [];
+
+// 2. Aggiungere i vincitori degli scontri
+for (let i = 0; i < qualifiedFighters.length; i += 2) {
+  const fighter1 = qualifiedFighters[i];
+  const fighter2 = qualifiedFighters[i + 1];
+
+  console.log(
+    `Scontro tra ${fighter1.name} (Potenza: ${fighter1.totalPower}) e ${fighter2.name} (Potenza: ${fighter2.totalPower})`
+  );
+
+  let winner;
+  if (fighter1.totalPower > fighter2.totalPower) {
+    winner = fighter1;
+  } else if (fighter2.totalPower > fighter1.totalPower) {
+    winner = fighter2;
+  } else {
+    // Parità: vince chi viene prima
+    winner = fighter1;
+  }
+
+  winners.push(winner); // Aggiungi il vincitore all'array dei vincitori
+
+  console.log(`Vince ${winner.name} con una potenza di ${winner.totalPower}`);
+  console.log('-----------');
+}
+
+// 3. Ordinare i vincitori in ordine decrescente di potenza
+winners.sort((a, b) => b.totalPower - a.totalPower);
+
+// 4. Selezionare i primi 3 vincitori per il podio
+const top3 = winners.slice(0, 3);
+
+// 5. Premiazione: Annunciare il podio
+console.log('-----------');
+console.log('Premiazione del torneo:');
+console.log('-----------');
+console.log(
+  `🏅 **1° posto:** ${top3[0].name} con una potenza di ${top3[0].totalPower}`
+);
+console.log(
+  `🥈 **2° posto:** ${top3[1].name} con una potenza di ${top3[1].totalPower}`
+);
+console.log(
+  `🥉 **3° posto:** ${top3[2].name} con una potenza di ${top3[2].totalPower}`
+);
