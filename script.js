@@ -1,3 +1,8 @@
+// script.js
+
+// Importa le funzioni necessarie
+import { getRandomAndRemove } from './function.js';
+
 // Array partecipanti torneo
 const fighters = [
   {
@@ -102,3 +107,16 @@ const weapons = [
     power: 250,
   },
 ];
+
+// Ogni combattente sceglie un arma casualmente
+fighters.forEach((fighter) => {
+  if (weapons.length > 0) {
+    fighter.weapon = getRandomAndRemove(weapons);
+    fighter.totalPower = fighter.power + fighter.weapon.power;
+  } else {
+    fighter.weapon = { name: 'Nessuna arma disponibile', power: 0 };
+    fighter.totalPower = fighter.power;
+  }
+});
+
+console.log(fighters);
